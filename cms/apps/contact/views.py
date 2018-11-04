@@ -1,6 +1,23 @@
-from django.http import HttpResponse
+from django.forms import ModelForm
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
+from django.utils import timezone
+
+from cms.apps.contact.forms import InquiryForm
 
 
 def index(request):
-    return render(request, 'contact/index.html')
+    form = InquiryForm()
+    return render(request, 'contact/index.html', {'form': form})
+
+
+def save(request):
+    form = InquiryForm(request.POST)
+
+    if form.is_valid():
+        model = form.save(commit=False)  # type: ModelForm
+        model.date = timezone.now()
+        model.save()
+
+    return HttpResponseRedirect(reverse('polls:index'))

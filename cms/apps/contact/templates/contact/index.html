@@ -1,1 +1,7 @@
-Contact page (template)
+<form action="{% url 'polls:save' %}" method="post">
+    {% csrf_token %}
+
+    {{ form }}
+
+    <input type="submit" value="Send">
+</form>
