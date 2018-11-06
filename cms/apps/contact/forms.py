@@ -6,9 +6,4 @@ from cms.apps.contact.models import Inquiry
 class InquiryForm(ModelForm):
     class Meta:
         model = Inquiry
-        exclude = ['date']
-
-
-
-
-
+        fields = ['name', 'email', 'text']

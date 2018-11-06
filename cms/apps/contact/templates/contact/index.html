@@ -1,7 +1,5 @@
-<form action="{% url 'polls:save' %}" method="post">
-    {% csrf_token %}
+{% extends 'base.html' %}
 
+{% block content %}
     {{ form }}
-
-    <input type="submit" value="Send">
-</form>
+{% endblock %}
