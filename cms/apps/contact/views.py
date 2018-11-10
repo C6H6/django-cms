@@ -17,7 +17,7 @@ def save(request):
 
     if form.is_valid():
         model = form.save(commit=False)  # type: ModelForm
-        model.date = timezone.now()
+        model.created_at = timezone.now()
         model.save()
 
-    return HttpResponseRedirect(reverse('polls:index'))
+    return HttpResponseRedirect(reverse('contact:index'))
