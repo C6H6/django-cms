@@ -36,11 +36,12 @@
         <div class="col-sm-2 sidenav">
             {% block sidebar-right %}
                 Newsletter:
-                <form action='{{newsletter_form_url}}' method='POST'>
+                <form action='{{ newsletter_form_url }}' method='POST'>
 
-                {% csrf_token %}
-                {{ newsletter_form }}
-                <input type="submit" value="Save">
+                    {% csrf_token %}
+                    {{ newsletter_form }}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="submit" value="Save">
 
                 </form>
             {% endblock %}

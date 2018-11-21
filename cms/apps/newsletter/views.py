@@ -6,7 +6,6 @@ from django.utils import timezone
 
 
 def save_email(request):
-
     form = NewsletterForm(request.POST)
 
     if form.is_valid():
@@ -15,4 +14,5 @@ def save_email(request):
         model.active = True
         model.save()
 
-    return redirect('/')
+    next_url = request.POST.get('next', '/')
+    return redirect(next_url)
