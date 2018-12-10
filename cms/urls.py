@@ -19,5 +19,6 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact/', include('cms.apps.contact.urls')),
-    path('newsletter/', include('cms.apps.newsletter.urls'))
+    path('newsletter/', include('cms.apps.newsletter.urls')),
+    path('', include('cms.apps.authorization.urls'))
 ]

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'authorization:login-check' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login">
+    </form>
+
+    <div>
+        <a href="{% url 'authorization:registration' %}">Registration</a>
+    </div>
+{% endblock %}

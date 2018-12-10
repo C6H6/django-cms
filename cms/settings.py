@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cms.apps.contact.apps.ContactConfig',
-    'cms.apps.newsletter.apps.NewsletterConfig'
+    'cms.apps.newsletter.apps.NewsletterConfig',
+    'cms.apps.authorization.apps.AuthorizationConfig'
 ]
 
 MIDDLEWARE = [
