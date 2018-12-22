@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'cms.apps.contact.apps.ContactConfig',
     'cms.apps.newsletter.apps.NewsletterConfig',
     'cms.apps.authorization.apps.AuthorizationConfig',
-    'cms.apps.travel.apps.TravelConfig'
+    'cms.apps.travel.apps.TravelConfig',
+    'cms.apps.core.apps.CoreConfig'
 ]
 
 MIDDLEWARE = [

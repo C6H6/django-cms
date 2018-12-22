@@ -6,13 +6,15 @@ from django.contrib import messages
 
 def user_login(request):
     if request.user.is_authenticated:
-        return redirect('contact:index')
+        return redirect('core:index')
     form = AuthenticationForm()
     return render(request, 'authorization/login.html', {'form': form})
 
 
 def check_login(request):
-    form = AuthenticationForm(request.POST)
+    form = AuthenticationForm(data=request.POST)
+
+    print(form.is_valid())
 
     if form.is_valid():
         username = form.cleaned_data.get('username')
@@ -20,7 +22,7 @@ def check_login(request):
 
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('contact:index')
+        return redirect('core:index')
 
     for message in form.get_invalid_login_error():
         messages.add_message(request, messages.ERROR, message)
@@ -41,7 +43,7 @@ def check_registration(request):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         login(request, user)
-        return redirect('contact:index')
+        return redirect('core:index')
 
     for message in form.errors.values():
         print(message)
@@ -52,4 +54,4 @@ def check_registration(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('contact:index')
+    return redirect('core:index')

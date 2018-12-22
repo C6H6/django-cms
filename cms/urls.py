@@ -21,5 +21,6 @@ urlpatterns = [
     path('contact/', include('cms.apps.contact.urls')),
     path('newsletter/', include('cms.apps.newsletter.urls')),
     path('', include('cms.apps.authorization.urls')),
-    path('travel/', include('cms.apps.travel.urls'))
+    path('travel/', include('cms.apps.travel.urls')),
+    path('', include('cms.apps.core.urls'))
 ]
