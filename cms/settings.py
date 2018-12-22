@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cms.apps.contact.apps.ContactConfig',
     'cms.apps.newsletter.apps.NewsletterConfig',
-    'cms.apps.authorization.apps.AuthorizationConfig'
+    'cms.apps.authorization.apps.AuthorizationConfig',
+    'cms.apps.travel.apps.TravelConfig'
 ]
 
 MIDDLEWARE = [
