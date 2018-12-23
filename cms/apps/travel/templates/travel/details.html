@@ -10,4 +10,8 @@
     <div>
         {{ travel.price }}
     </div>
+
+    {% for image in travel.images.all %}
+        <img width="300px" src="{{ image.image.url }}">
+    {% endfor %}
 {% endblock %}
