@@ -10,3 +10,8 @@ class Travel(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TravelImage(models.Model):
+    travel = models.ForeignKey(Travel, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField()
