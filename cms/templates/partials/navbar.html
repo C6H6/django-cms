@@ -8,10 +8,9 @@
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav">
-        <li><a href="{% url 'core:index' %}">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="{% url 'contact:index' %}">Contact</a></li>
+        <li><a class="{% block menu_home %}{% endblock %}" href="{% url 'core:index' %}">Home</a></li>
+        <li><a class="{% block menu_travels %}{% endblock %}" href="{% url 'travel:index' %}">Travels</a></li>
+        <li><a class="{% block menu_contact %}{% endblock %}" href="{% url 'contact:index' %}">Contact</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}

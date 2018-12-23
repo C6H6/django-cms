@@ -13,9 +13,6 @@ def user_login(request):
 
 def check_login(request):
     form = AuthenticationForm(data=request.POST)
-
-    print(form.is_valid())
-
     if form.is_valid():
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
@@ -46,7 +43,6 @@ def check_registration(request):
         return redirect('core:index')
 
     for message in form.errors.values():
-        print(message)
         messages.add_message(request, messages.ERROR, message)
 
     return redirect('authorization:registration')

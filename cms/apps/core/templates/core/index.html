@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
     <ul>
-    {% for promotion in promoted %}
-
-
-        <li><a href="{% url 'travel:details' promotion.id %}">{{ promotion.title }}</a></li>
-
-
-    {% endfor %}
+        {% for promotion in promoted %}
+            <li><a href="{% url 'travel:details' promotion.id %}">{{ promotion.title }}</a></li>
+        {% endfor %}
     </ul>
 {% endblock %}
