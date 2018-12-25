@@ -24,7 +24,8 @@ urlpatterns = [
     path('newsletter/', include('cms.apps.newsletter.urls')),
     path('', include('cms.apps.authorization.urls')),
     path('travel/', include('cms.apps.travel.urls')),
-    path('', include('cms.apps.core.urls'))
+    path('', include('cms.apps.core.urls')),
+    path('checkout/', include('cms.apps.checkout.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

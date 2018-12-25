@@ -11,6 +11,14 @@
         {{ travel.price }}
     </div>
 
+    <div>
+        <form method="post" action="{% url 'checkout:add' %}">
+            {% csrf_token %}
+            <input type="hidden" name="travel-id" value="{{ travel.id }}">
+            <button type="submit" class="btn btn-primary">Buy</button>
+        </form>
+    </div>
+
     {% for image in travel.images.all %}
         <img width="300px" src="{{ image.image.url }}">
     {% endfor %}

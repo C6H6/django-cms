@@ -14,6 +14,8 @@ import os
 from django.apps import AppConfig
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.urls import reverse_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -40,7 +42,8 @@ INSTALLED_APPS = [
     'cms.apps.newsletter.apps.NewsletterConfig',
     'cms.apps.authorization.apps.AuthorizationConfig',
     'cms.apps.travel.apps.TravelConfig',
-    'cms.apps.core.apps.CoreConfig'
+    'cms.apps.core.apps.CoreConfig',
+    'cms.apps.checkout.apps.CheckoutConfig'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,5 @@ STATICFILES_DIRS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

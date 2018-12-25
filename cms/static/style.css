@@ -42,3 +42,7 @@ img.travel-main-image {
     max-height: 300px;
     object-fit: cover;
 }
+
+.checkout-box {
+    padding-top: 10px;
+}
