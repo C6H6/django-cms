@@ -29,3 +29,16 @@ footer {
         height: auto;
     }
 }
+
+img {
+    width: 100%;
+}
+
+.travels-box, .search-box {
+    padding-top: 10px;
+}
+
+img.travel-main-image {
+    max-height: 300px;
+    object-fit: cover;
+}
