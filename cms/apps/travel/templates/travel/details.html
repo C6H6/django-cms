@@ -12,6 +12,14 @@
     </div>
 
     <div>
+        Country: {{ travel.country.name }}
+    </div>
+
+    <div>
+        Date: {{ travel.start_date }} - {{ travel.end_date }}
+    </div>
+
+    <div>
         <form method="post" action="{% url 'checkout:add' %}">
             {% csrf_token %}
             <input type="hidden" name="travel-id" value="{{ travel.id }}">

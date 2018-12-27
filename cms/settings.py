@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'cms.apps.authorization.apps.AuthorizationConfig',
     'cms.apps.travel.apps.TravelConfig',
     'cms.apps.core.apps.CoreConfig',
-    'cms.apps.checkout.apps.CheckoutConfig'
+    'cms.apps.checkout.apps.CheckoutConfig',
+    'django_countries'
 ]
 
 MIDDLEWARE = [
