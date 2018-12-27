@@ -13,14 +13,24 @@ def add(request):
     existing = request.session.get('offers', [])
     existing.append(offer)
     request.session['offers'] = existing
-    return redirect('checkout:summary')
+    return redirect('checkout:new')
+
+
+@login_required(login_url='/login/')
+def new(request):
+    return render(request, 'checkout/new.html')
 
 
 @login_required(login_url='/login/')
 def summary(request):
     offers = request.session.get('offers')
 
+    if not offers:
+        return redirect('travel:index')
+
     checkout_summary = CheckoutSummary
+    checkout_summary.offers = []
+
     total = 0
 
     for checkout_offer in offers:
