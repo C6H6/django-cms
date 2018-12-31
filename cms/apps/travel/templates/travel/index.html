@@ -10,7 +10,7 @@
                         <div class="form-group">
                             <label for="name" class="control-label">Name:</label>
                             <input id="name" class="form-control" name="name" title="name" type="text"
-                                   placeholder="Name" value="{{ params.name|default:"" }}">
+                                   placeholder="Name" value="{{ params.title__contains|default:"" }}">
                         </div>
                     </div>
                     <div class="col-md-2 pt-3">
@@ -50,25 +50,45 @@
                 </div>
             </div>
         </div>
-    </form>
 
-    <div class="travels-box">
-        {% for travel in travels %}
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ travel.images.first.image.url }}">
-                        <img class="img-fluid rounded mb-3 mb-md-0 travel-main-image"
-                             src="{{ travel.images.first.image.url }}" alt="">
-                    </a>
+
+        <div class="travels-box">
+            {% for travel in travels %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{{ travel.images.first.image.url }}">
+                            <img class="img-fluid rounded mb-3 mb-md-0 travel-main-image"
+                                 src="{{ travel.images.first.image.url }}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>{{ travel.title }}</h3>
+                        <p>{{ travel.description }}</p>
+                        <p><b>Price: </b>{{ travel.price }} PLN</p>
+                        <a class="btn btn-primary" href="{% url 'travel:details' travel.id %}">Details</a>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <h3>{{ travel.title }}</h3>
-                    <p>{{ travel.description }}</p>
-                    <p><b>Price: </b>{{ travel.price }} PLN</p>
-                    <a class="btn btn-primary" href="{% url 'travel:details' travel.id %}">Details</a>
-                </div>
+                <hr>
+            {% endfor %}
+
+            <div class="pagination">
+            <span class="step-links">
+                {% if travels.has_previous %}
+                    <button type="submit" value="1" name="p" class="btn">&laquo; first</button>
+                    <button type="submit" value="{{ travels.previous_page_number }}" name="p" class="btn">previous</button>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ travels.number }} of {{ travels.paginator.num_pages }}.
+                </span>
+
+                {% if travels.has_next %}
+                    <button type="submit" value="{{ travels.next_page_number }}" name="p" class="btn">next</button>
+                    <button type="submit" value="{{ travels.paginator.num_pages }}" name="p" class="btn">last &raquo;</button>
+                {% endif %}
+            </span>
             </div>
-            <hr>
-        {% endfor %}
-    </div>
+
+        </div>
+    </form>
 {% endblock %}

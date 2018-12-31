@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
 from cms.apps.travel.models import Travel
@@ -9,7 +10,10 @@ def index(request):
     params = get_params(get)
     price_range = {'max': Travel.objects.all().aggregate(Max('price')),
                    'min': Travel.objects.all().aggregate(Min('price'))}
-    travels = Travel.objects.filter(**params)
+    all_travels = Travel.objects.filter(**params)
+    page = get.get('p')
+    paginator = Paginator(all_travels, 10)
+    travels = paginator.get_page(page)
     return render(request, 'travel/index.html', {'travels': travels, 'params': params, 'price_range': price_range})
 
 
