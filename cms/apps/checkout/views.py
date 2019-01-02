@@ -9,7 +9,7 @@ from cms.apps.travel.models import Travel
 @login_required(login_url='/login/')
 def add(request):
     data = request.POST
-    offer = CheckoutOffer(data.get('travel-id'))
+    offer = CheckoutOffer(data.get('travel-id'), data.get('count'))
     existing = request.session.get('offers', [])
 
     for exist in existing:
@@ -39,9 +39,10 @@ def summary(request):
     total = 0
 
     for checkout_offer in offers:
+        count = int(checkout_offer.people)
         offer = Travel.objects.get(pk=checkout_offer.offer_id)
-        total += offer.price * 1
-        checkout_summary.offers.append({'offer': offer, 'people': 1, 'total': offer.price * 1})
+        total += offer.price * count
+        checkout_summary.offers.append({'offer': offer, 'people': count, 'total': offer.price * count})
 
     checkout_summary.total_price = total
 
