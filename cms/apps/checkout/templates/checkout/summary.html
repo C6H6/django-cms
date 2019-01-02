@@ -4,6 +4,7 @@
     <div class="checkout-box">
         <div class="row cart-body">
             <form class="form-horizontal" method="post" action="">
+            {% csrf_token %}
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -126,12 +127,38 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Passengers data</div>
+                        <div class="panel-body">
+                            {% for offer in summary.offers %}
+                                {% with ''|center:offer.people as range %}
+                                    {% for _ in range %}
+
+                                        <h4><b>{{ offer.offer.title }}</b> - Passenger {{ forloop.counter }}: </h4>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-xs-12">
+                                                First Name:
+                                                <input type="text" name="travel[{{ offer.offer.id }}][{{ forloop.counter }}][first_name]" class="form-control"
+                                                       title="first_name">
+                                            </div>
+                                            <div class="span1"></div>
+                                            <div class="col-md-6 col-xs-12">
+                                                Last Name:
+                                                <input type="text" name="travel[{{ offer.offer.id }}][{{ forloop.counter }}][last_name]" class="form-control"
+                                                       title="last_name">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    {% endfor %}
+                                {% endwith %}
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
 
             </form>
-        </div>
-        <div class="row cart-footer">
-
         </div>
     </div>
 {% endblock %}

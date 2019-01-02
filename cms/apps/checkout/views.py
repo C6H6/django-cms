@@ -9,7 +9,8 @@ from cms.apps.travel.models import Travel
 @login_required(login_url='/login/')
 def add(request):
     data = request.POST
-    offer = CheckoutOffer(data.get('travel-id'), data.get('count'))
+    count = int(data.get('count') or 1)
+    offer = CheckoutOffer(data.get('travel-id'), count)
     existing = request.session.get('offers', [])
 
     for exist in existing:
