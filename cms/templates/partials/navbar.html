@@ -14,9 +14,14 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
-            <li><a href="{% url 'authorization:logout' %}">Logged as: <b>{{ user.get_username }}</b> | <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {% if request.session.offers %}
+                <li><a href="{% url 'checkout:summary' %}"><span class="glyphicon glyphicon-plane"></span> Your travel is waiting! {% if request.session.offers|length > 1 %}(even {{ request.session.offers|length }}!) {% endif %}</a></li>
+            {% endif %}
+            <li><a href="{% url 'authorization:logout' %}">Logged as: <b>{{ user.get_username }}</b> | <span
+                    class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         {% else %}
-            <li><a href="{% url 'authorization:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="{% url 'authorization:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+            </li>
         {% endif %}
     </ul>
 </div>
