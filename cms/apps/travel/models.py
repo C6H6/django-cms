@@ -1,8 +1,14 @@
-from datetime import timedelta
-
 from django.db import models
 from django.utils import timezone
 from django_countries.fields import CountryField
+
+
+def default_start_date():
+    return timezone.now() + timezone.timedelta(days=7)
+
+
+def default_end_date():
+    return timezone.now() + timezone.timedelta(days=14)
 
 
 class Travel(models.Model):
@@ -11,8 +17,8 @@ class Travel(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     active = models.BooleanField(default=True)
     country = CountryField()
-    start_date = models.DateTimeField(default=(timezone.now() + timedelta(7)))
-    end_date = models.DateTimeField(default=(timezone.now() + timedelta(14)))
+    start_date = models.DateTimeField(default=default_start_date)
+    end_date = models.DateTimeField(default=default_end_date)
     promotion_on_homepage = models.BooleanField(default=False)
 
     def __str__(self):

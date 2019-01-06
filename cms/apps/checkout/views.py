@@ -1,8 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import datetime
+from django.utils.html import escape
 
 from cms.apps.checkout.classes import CheckoutOffer, CheckoutSummary
+from cms.apps.checkout.models import Purchase
+from cms.apps.checkout.services import process_purchase
 from cms.apps.travel.models import Travel
 
 
@@ -64,3 +68,19 @@ def remove(request, offer_id):
 
     request.session['offers'] = existing
     return redirect('checkout:summary')
+
+
+@login_required(login_url='/login/')
+def purchase(request):
+    data = request.POST
+    offers = request.session.get('offers')
+    user = request.user
+
+    result = process_purchase(offers, data, user)
+
+    if result:
+        del request.session['offers']
+        request.session.modified = True
+        return render(request, 'checkout/purchase_completed.html')
+
+    return HttpResponse(escape(repr(request)))

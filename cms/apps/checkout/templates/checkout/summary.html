@@ -3,7 +3,7 @@
 {% block content %}
     <div class="checkout-box">
         <div class="row cart-body">
-            <form class="form-horizontal" method="post" action="">
+            <form class="form-horizontal" method="post" action="{% url 'checkout:purchase' %}">
             {% csrf_token %}
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
                     <div class="panel panel-info">
@@ -140,13 +140,13 @@
                                         <div class="form-group">
                                             <div class="col-md-6 col-xs-12">
                                                 First Name:
-                                                <input type="text" name="travel[{{ offer.offer.id }}][{{ forloop.counter }}][first_name]" class="form-control"
+                                                <input type="text" name="travel.{{ offer.offer.id }}.{{ forloop.counter }}.first_name" class="form-control"
                                                        title="first_name">
                                             </div>
                                             <div class="span1"></div>
                                             <div class="col-md-6 col-xs-12">
                                                 Last Name:
-                                                <input type="text" name="travel[{{ offer.offer.id }}][{{ forloop.counter }}][last_name]" class="form-control"
+                                                <input type="text" name="travel.{{ offer.offer.id }}.{{ forloop.counter }}.last_name" class="form-control"
                                                        title="last_name">
                                             </div>
                                         </div>
