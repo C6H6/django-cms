@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
+from cms.apps.checkout.models import Purchase
 from cms.apps.travel.models import Travel
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Sum
 
 
 def index(request):
@@ -19,7 +20,9 @@ def index(request):
 
 def details(request, travel_id):
     travel = get_object_or_404(Travel, pk=travel_id, active=True)
-    return render(request, 'travel/details.html', {'travel': travel})
+    places_taken = Purchase.objects.filter(travel=travel).aggregate(Sum('passengers'))
+    places_left = travel.passengers_limit - (places_taken['passengers__sum'] or 0)
+    return render(request, 'travel/details.html', {'travel': travel, 'places_left': places_left})
 
 
 def get_params(params):

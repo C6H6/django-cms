@@ -20,6 +20,10 @@
     </div>
 
     <div>
+        Places left: <b>{{ places_left }}</b>
+    </div>
+
+    <div>
         <form class="form-horizontal" method="post" action="{% url 'checkout:add' %}">
             {% csrf_token %}
             <input type="hidden" name="travel-id" value="{{ travel.id }}">
@@ -28,7 +32,7 @@
             <div class="form-group row">
                 <div class="col-3">
                     <label for="count">Number of people: </label>
-                    <input class="form-control" id="count" type="number" name="count" min="1" title="count" required>
+                    <input class="form-control" id="count" type="number" name="count" min="1" max="{{ places_left }}" title="count" required>
                 </div>
             </div>
 

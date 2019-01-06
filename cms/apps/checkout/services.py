@@ -16,4 +16,4 @@ def process_purchase(offers, data, user):
         new_purchase.passengers_data = ''
         new_purchase.save()
 
-        return True
+    return True

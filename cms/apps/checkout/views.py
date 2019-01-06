@@ -1,8 +1,7 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.db.models import Sum
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.utils.html import escape
 
 from cms.apps.checkout.classes import CheckoutOffer, CheckoutSummary
 from cms.apps.checkout.models import Purchase
@@ -20,6 +19,13 @@ def add(request):
     for exist in existing:
         if offer.offer_id == exist.offer_id:
             return render(request, 'checkout/offer_exists.html')
+
+    travel = get_object_or_404(Travel, pk=data.get('travel-id'), active=True)
+    places_taken = Purchase.objects.filter(travel=travel).aggregate(Sum('passengers'))
+    places_left = travel.passengers_limit - (places_taken['passengers__sum'] or 0)
+
+    if count > places_left:
+        return render(request, 'checkout/places_taken.html')
 
     existing.append(offer)
     request.session['offers'] = existing
@@ -83,4 +89,4 @@ def purchase(request):
         request.session.modified = True
         return render(request, 'checkout/purchase_completed.html')
 
-    return HttpResponse(escape(repr(request)))
+    return render(request, 'checkout/error.html')

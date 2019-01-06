@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import IntegerField
 from django.utils import timezone
 from django_countries.fields import CountryField
 
@@ -17,6 +18,7 @@ class Travel(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     active = models.BooleanField(default=True)
     country = CountryField()
+    passengers_limit = IntegerField(default=20)
     start_date = models.DateTimeField(default=default_start_date)
     end_date = models.DateTimeField(default=default_end_date)
     promotion_on_homepage = models.BooleanField(default=False)
