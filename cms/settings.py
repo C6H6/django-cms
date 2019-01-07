@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'cms.apps.travel.apps.TravelConfig',
     'cms.apps.core.apps.CoreConfig',
     'cms.apps.checkout.apps.CheckoutConfig',
-    'django_countries'
+    'django_countries',
+    'cms.apps.settings.apps.SettingsConfig'
 ]
 
 MIDDLEWARE = [
@@ -70,7 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cms.apps.newsletter.context_processors.newsletter_form'
+                'cms.apps.newsletter.context_processors.newsletter_form',
+                'cms.apps.settings.context_processors.settings_processor'
             ],
         },
     },
@@ -126,6 +128,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'cms/uploads/')
 MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
+
+UPLOADS_URL = '/uploads/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "cms/static")
