@@ -15,15 +15,19 @@
 
 {% block content %}
 
+    <div class="text-center"><h1><b>Recommended travels</b></h1></div>
     <div id="homepage-slider">
         <div class="w3-container">
             <div class="w3-content w3-display-container">
                 {% for promotion in promoted %}
                     <div class="w3-display-container mySlides">
-                        <a href="{% url 'travel:details' promotion.id %}"><img src="{{ promotion.images.first.image.url }}" style="height:300px">
-                        <div class="w3-display-topmiddle w3-large w3-container w3-padding-16 w3-black">
-                            {{ promotion.title }}
-                        </div></a>
+                        <a href="{% url 'travel:details' promotion.id %}"><img
+                                src="{{ promotion.images.first.image.url }}" style="height:400px">
+                            <div class="w3-display-topmiddle w3-large w3-container w3-padding-16 w3-black">
+                                <div class="text-center"><b>{{ promotion.title }}</b></div>
+                                <small class="text-center">{{ promotion.description|truncatechars:100 }}</small>
+                            </div>
+                        </a>
                     </div>
                 {% endfor %}
                 <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
@@ -31,6 +35,8 @@
             </div>
         </div>
     </div>
+
+    <div id="homepage-text">{{ settings.homepage_text|safe }}</div>
 
     <script>
         var slideIndex = 1;

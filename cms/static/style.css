@@ -52,5 +52,9 @@ img.travel-main-image {
 }
 
 #homepage-slider {
-    padding-top: 10px;
+    padding: 10px 0 20px;
+}
+
+#homepage-text {
+    padding: 20px;
 }

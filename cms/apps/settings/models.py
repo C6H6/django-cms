@@ -3,4 +3,8 @@ from django.db.models import ImageField
 
 
 class Settings(models.Model):
-        site_logo = ImageField(upload_to='logo/', null=True)
+    site_logo = ImageField(upload_to='logo/', null=True)
+    page_title = models.CharField(max_length=200)
+    homepage_text = models.TextField()
+    footer_text = models.TextField()
+    mourning_mode = models.BooleanField(default=False)
