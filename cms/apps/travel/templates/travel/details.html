@@ -1,48 +1,103 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block custom_scripts %}
+    <link rel="stylesheet" href="{% static 'gallery.css' %}">
+    <script src="{% static 'gallery.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     <h2>{{ travel.title }}</h2>
 
-    <div>
-        {{ travel.description }}
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="travel-details-description p10">
+                {{ travel.description }}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="p10">
+
+                <form method="post" action="{% url 'checkout:add' %}">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="travel-id" value="{{ travel.id }}">
+
+                    <div class="row">
+                        <div class="form-group col-sm-8">
+                            Places left: <b>{{ places_left }}</b>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <label for="count">People:</label>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <input name="count" id="count" type="number" class="form-control input-normal"
+                                               min="1"
+                                               max="{{ places_left }}" value="1">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary">Buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div>
-        {{ travel.price }}
+    <div class="p10">
+        <h4>Price: <b>{{ travel.price }}</b> PLN per one person</h4>
     </div>
 
-    <div>
-        Country: {{ travel.country.name }}
+    <div class="p10">
+        Country: <b>{{ travel.country.name }}</b>
     </div>
 
-    <div>
-        Date: {{ travel.start_date }} - {{ travel.end_date }}
+    <div class="p10">
+        Date: <b>{{ travel.start_date|date:"d F Y" }} - {{ travel.end_date|date:"d F Y" }}</b>
     </div>
 
-    <div>
-        Places left: <b>{{ places_left }}</b>
+    <div class="row">
+        {% for image in travel.images.all %}
+            <div class="column">
+                <img src="{{ image.image.url }}" onclick="openModal();currentSlide({{ forloop.counter }})"
+                     class="hover-shadow" style="wh">
+            </div>
+        {% endfor %}
     </div>
 
-    <div>
-        <form class="form-horizontal" method="post" action="{% url 'checkout:add' %}">
-            {% csrf_token %}
-            <input type="hidden" name="travel-id" value="{{ travel.id }}">
+    <div id="myModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
 
-
-            <div class="form-group row">
-                <div class="col-3">
-                    <label for="count">Number of people: </label>
-                    <input class="form-control" id="count" type="number" name="count" min="1" max="{{ places_left }}" title="count" required>
+            {% for image in travel.images.all %}
+                <div class="mySlides">
+                    <img src="{{ image.image.url }}" style="width:100%">
                 </div>
+            {% endfor %}
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="caption-container">
+                <p id="caption"></p>
             </div>
 
+            {% for image in travel.images.all %}
+                <div class="column">
+                    <img class="demo" src="{{ image.image.url }}" onclick="currentSlide({{ forloop.counter }})">
+                </div>
+            {% endfor %}
 
-            <button type="submit" class="btn btn-primary">Buy</button>
-
-        </form>
+        </div>
     </div>
-
-    {% for image in travel.images.all %}
-        <img width="300px" src="{{ image.image.url }}">
-    {% endfor %}
 {% endblock %}
