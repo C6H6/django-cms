@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="{% url 'core:index' %}">{% if settings.site_logo.url %}<img style="width: auto; height: 40px" src="{{ settings.site_logo.url }}">{% else %}Logo{% endif %}</a>
+    <a class="navbar-brand" href="{% url 'core:index' %}">{% if settings.site_logo %}<img style="width: auto; height: 40px" src="{{ settings.site_logo.url }}">{% else %}Logo{% endif %}</a>
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav">

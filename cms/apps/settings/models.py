@@ -9,3 +9,6 @@ class Settings(models.Model):
     footer_text = models.TextField()
     left_column_text = models.TextField()
     mourning_mode = models.BooleanField(default=False)
+
+    def __str__(self):
+        return 'All settings'
