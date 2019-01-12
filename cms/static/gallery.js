@@ -1,30 +1,23 @@
-$(document).ready(function () {
-
-})
-// Open the Modal
 function openModal() {
     document.getElementById('myModal').style.display = "block";
 }
 
-// Close the Modal
 function closeModal() {
     document.getElementById('myModal').style.display = "none";
 }
 
-var slideIndex = 1;
+let slideIndex = 1;
 showSlides(slideIndex);
 
-// Next/previous controls
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
-// Thumbnail image controls
 function currentSlide(n) {
     showSlides(slideIndex = n);
 }
 
-document.onkeydown = function(evt) {
+document.onkeydown = function (evt) {
     evt = evt || window.event;
     let isEscape = false;
     if ("key" in evt) {
@@ -36,7 +29,6 @@ document.onkeydown = function(evt) {
         closeModal()
     }
 };
-
 
 function showSlides(n) {
     let i;

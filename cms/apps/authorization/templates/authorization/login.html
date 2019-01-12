@@ -2,19 +2,38 @@
 
 {% block content %}
 
-    {% if messages %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    {% endif %}
+    <div class="text-center">
+        <div class="login-form p10">
+            <div class="col-md-4 col-md-offset-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
 
-    <form action="{% url 'authorization:login-check' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Login">
-    </form>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
 
-    <div>
-        <a href="{% url 'authorization:registration' %}">Registration</a>
+                    <div class="card text-center card  bg-default mb-3">
+                        <form action="{% url 'authorization:login-check' %}" method="post">
+                            <div class="card-body">
+                                {% csrf_token %}
+                                {{ form }}
+                            </div>
+                            <div class="card-footer text-muted p10">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            Don't have account? <a href="{% url 'authorization:registration' %}">Registration</a>
+        </div>
     </div>
 {% endblock %}
+
