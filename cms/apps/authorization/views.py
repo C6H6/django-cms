@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from cms.apps.authorization.forms import AuthForm
+from cms.apps.authorization.forms import AuthForm, RegistrationForm
 
 
 def user_login(request):
@@ -30,12 +30,12 @@ def check_login(request):
 
 
 def user_registration(request):
-    form = UserCreationForm()
+    form = RegistrationForm()
     return render(request, 'authorization/registration.html', {'form': form})
 
 
 def check_registration(request):
-    form = UserCreationForm(request.POST)
+    form = RegistrationForm(request.POST)
     if form.is_valid():
         form.save()
         username = form.cleaned_data.get('username')
