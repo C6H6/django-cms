@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.forms import ModelForm
 from django.shortcuts import redirect
 
@@ -13,6 +14,8 @@ def save_email(request):
         model.created_at = timezone.now()
         model.active = True
         model.save()
+
+        messages.add_message(request, messages.SUCCESS, 'Email saved successfully!', extra_tags="newsletter")
 
     next_url = request.POST.get('next', '/')
     return redirect(next_url)

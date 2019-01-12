@@ -11,7 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    {% if settings.mourning_mode %}<link rel="stylesheet" type="text/css" href="{% static 'mourning.css' %}">{% endif %}
+    {% if settings.mourning_mode %}
+        <link rel="stylesheet" type="text/css" href="{% static 'mourning.css' %}">{% endif %}
     {% block custom_scripts %}{% endblock %}
 </head>
 <body>
@@ -28,7 +29,7 @@
     <div class="row content">
         <div class="col-sm-2 sidenav text-center">
             {% block sidebar-left %}
-                Left
+                {{ settings.left_column_text|safe }}
             {% endblock %}
         </div>
         <div class="col-sm-8">
@@ -40,13 +41,16 @@
             {% block sidebar-right %}
                 Newsletter:
                 <form action='{{ newsletter_form_url }}' method='POST'>
-
                     {% csrf_token %}
                     {{ newsletter_form }}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <input type="submit" value="Save">
-
                 </form>
+                {% for message in messages %}
+                    {% if 'newsletter' in message.tags %}
+                        {{ message }}
+                    {% endif %}
+                {% endfor %}
             {% endblock %}
         </div>
     </div>

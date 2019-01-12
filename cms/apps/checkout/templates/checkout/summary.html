@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block custom_scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+    <script src="{% static 'checkout.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     <div class="checkout-box">
         <div class="row cart-body">
-            <form class="form-horizontal" method="post" action="{% url 'checkout:purchase' %}">
+            <form class="form-horizontal" id="checkout-form" method="post" action="{% url 'checkout:purchase' %}">
             {% csrf_token %}
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
                     <div class="panel panel-info">
@@ -47,13 +53,13 @@
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Credit Card Number:</strong></div>
                                 <div class="col-md-12"><input type="text" class="form-control" name="car_number"
-                                                              value="" title="card_number">
+                                                              value="" title="card_number" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Card CVV:</strong></div>
                                 <div class="col-md-12"><input type="text" class="form-control" name="car_code"
-                                                              value="" title="card_cvv">
+                                                              value="" title="card_cvv" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -61,7 +67,7 @@
                                     <strong>Expiration Date</strong>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="" title="card-month">
+                                    <select class="form-control" name="" title="card-month" required>
                                         <option value="">Month</option>
                                         {% for month in months %}
                                             <option value="{{ month }}">{{ month }}</option>
@@ -69,7 +75,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="card-year" title="card-year">
+                                    <select class="form-control" name="card-year" title="card-year" required>
                                         <option value="">Year</option>
                                         {% for year in years %}
                                             <option value="{{ year }}">{{ year }}</option>
@@ -79,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <button type="submit" class="btn btn-primary btn-submit-fix pull-right">Place
+                                    <button type="button" id="place-order-button" class="btn btn-primary btn-submit-fix pull-right">Place
                                         Order
                                     </button>
                                 </div>
@@ -99,30 +105,30 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
                                     <strong>First Name:</strong>
-                                    <input type="text" name="first_name" class="form-control" title="first_name">
+                                    <input type="text" name="first_name" class="form-control" title="first_name" required>
                                 </div>
                                 <div class="span1"></div>
                                 <div class="col-md-6 col-xs-12">
                                     <strong>Last Name:</strong>
-                                    <input type="text" name="last_name" class="form-control" title="last_name">
+                                    <input type="text" name="last_name" class="form-control" title="last_name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Address:</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" title="address">
+                                    <input type="text" name="address" class="form-control" title="address" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>City:</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="city" class="form-control" title="city">
+                                    <input type="text" name="city" class="form-control" title="city" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Phone Number:</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="phone_number" class="form-control" title="phone_number">
+                                    <input type="text" name="phone_number" class="form-control" title="phone_number" required>
                                 </div>
                             </div>
                         </div>
@@ -141,13 +147,13 @@
                                             <div class="col-md-6 col-xs-12">
                                                 First Name:
                                                 <input type="text" name="travel.{{ offer.offer.id }}.{{ forloop.counter }}.first_name" class="form-control"
-                                                       title="first_name">
+                                                       title="first_name" required>
                                             </div>
                                             <div class="span1"></div>
                                             <div class="col-md-6 col-xs-12">
                                                 Last Name:
                                                 <input type="text" name="travel.{{ offer.offer.id }}.{{ forloop.counter }}.last_name" class="form-control"
-                                                       title="last_name">
+                                                       title="last_name" required>
                                             </div>
                                         </div>
                                         <hr>

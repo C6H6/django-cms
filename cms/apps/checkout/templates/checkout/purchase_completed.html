@@ -1,10 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-        <h2>Done</h2>
+    <div class="text-center p10">
+        <h2>Purchase completed!</h2>
+        <h6>Pack your luggage</h6>
 
-    <div class="row">
-        <a href="{% url 'core:index' %}"><button class="btn btn-secondary">Homepage</button></a>
+        <div class="info-page-icon">
+            <img src="{% static 'icons/backpack.png' %}" style="width: 20em">
+        </div>
+
+        <div class="info-page-buttons">
+            <div class="row">
+                <a href="{% url 'core:index' %}">
+                    <button class="btn btn-primary">Homepage</button>
+                </a>
+            </div>
+        </div>
     </div>
 
+    <div>Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+            href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0
+        BY</a></div>
 {% endblock %}

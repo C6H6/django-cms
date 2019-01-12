@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+    <div class="text-center p10">
         <h2>An unexpected error occurred</h2>
 
-    <div class="row">
-        <a href="{% url 'core:index' %}"><button class="btn btn-secondary">Homepage</button></a>
+        <div class="info-page-icon">
+            <img src="{% static 'icons/overturned-car.png' %}" style="width: 20em">
+        </div>
+
+        <div class="info-page-buttons">
+            <div class="row">
+                <a href="{% url 'core:index' %}">
+                    <button class="btn btn-primary">Homepage</button>
+                </a>
+            </div>
+        </div>
     </div>
 
+    <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+            href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0
+        BY</a></div>
 {% endblock %}
