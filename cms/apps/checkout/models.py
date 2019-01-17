@@ -14,3 +14,6 @@ class Purchase(models.Model):
     customer_phone = models.CharField(max_length=15)
     passengers = models.IntegerField()
     passengers_data = models.TextField()
+
+    def __str__(self):
+        return self.travel.title + " | " + self.user.username + " | (" + str(self.passengers) + ")"

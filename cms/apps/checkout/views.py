@@ -5,7 +5,7 @@ import datetime
 
 from cms.apps.checkout.classes import CheckoutOffer, CheckoutSummary
 from cms.apps.checkout.models import Purchase
-from cms.apps.checkout.services import process_purchase
+from cms.apps.checkout.services import process_purchase, send_purchase_mail
 from cms.apps.travel.models import Travel
 
 
@@ -83,6 +83,7 @@ def purchase(request):
     user = request.user
 
     result = process_purchase(offers, data, user)
+    send_purchase_mail(user, offers)
 
     if result:
         del request.session['offers']
