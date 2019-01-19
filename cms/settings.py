@@ -127,7 +127,9 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'cms/uploads/')
 MEDIA_URL = '/media/'
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 UPLOADS_URL = '/uploads/'
 
