@@ -2,10 +2,10 @@
 
 from django.db import migrations
 
-from cms.apps.settings.models import Settings
 
+def create_settings(apps, schema_editor):
+    Settings = apps.get_model("settings", "Settings")
 
-def create_settings():
     count = int(Settings.objects.filter().count())
 
     if count == 0:
@@ -26,5 +26,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        create_settings()
+        migrations.RunPython(create_settings),
     ]
