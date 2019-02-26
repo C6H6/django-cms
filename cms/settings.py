@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'cms.apps.core.apps.CoreConfig',
     'cms.apps.checkout.apps.CheckoutConfig',
     'django_countries',
-    'cms.apps.settings.apps.SettingsConfig'
+    'cms.apps.settings.apps.SettingsConfig',
+    'cms.apps.partner.apps.PartnerConfig'
 ]
 
 MIDDLEWARE = [
@@ -127,9 +128,7 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'cms/uploads/')
 MEDIA_URL = '/media/'
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 UPLOADS_URL = '/uploads/'
 
