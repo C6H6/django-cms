@@ -22,6 +22,9 @@
                     {% csrf_token %}
 
                     <input type="hidden" name="travel-id" value="{{ travel.id }}">
+                    {% if ref %}
+                        <input type="hidden" name="ref" value="{{ ref }}">
+                    {% endif %}
 
                     <div class="row">
                         <div class="form-group col-sm-8">

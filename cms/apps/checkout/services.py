@@ -1,4 +1,5 @@
 from cms.apps.checkout.models import Purchase
+from cms.apps.partner.models import Partner, PartnerPurchase
 from cms.apps.travel.models import Travel
 from django.core.mail import send_mail
 
@@ -17,6 +18,9 @@ def process_purchase(offers, data, user):
         new_purchase.passengers_data = ''
         new_purchase.save()
 
+        if offer.ref:
+            process_ref(new_purchase, offer.ref)
+
     return True
 
 
@@ -32,3 +36,11 @@ def send_purchase_mail(user, offers):
     send_mail("Thank you for purchase", text, "admin@django-cms.com", [user.email])
 
     return True
+
+
+def process_ref(purchase, ref_code):
+    partner = Partner.objects.get(code=ref_code)
+    partner_purchase = PartnerPurchase()
+    partner_purchase.partner = partner
+    partner_purchase.purchase = purchase
+    partner_purchase.save()
