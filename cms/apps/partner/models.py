@@ -8,6 +8,9 @@ class Partner(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     code = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.user.username
+
 
 class PartnerPurchase(models.Model):
     partner = models.ForeignKey(Partner, on_delete=models.CASCADE)

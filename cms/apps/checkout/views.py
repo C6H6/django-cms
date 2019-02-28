@@ -13,7 +13,8 @@ from cms.apps.travel.models import Travel
 def add(request):
     data = request.POST
     count = int(data.get('count') or 1)
-    offer = CheckoutOffer(data.get('travel-id'), count)
+    ref = data.get('ref') or None
+    offer = CheckoutOffer(data.get('travel-id'), count, ref)
     existing = request.session.get('offers', [])
 
     for exist in existing:

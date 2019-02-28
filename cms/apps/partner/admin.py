@@ -3,7 +3,20 @@ import string
 
 from django.contrib import admin
 
-from cms.apps.partner.models import Partner
+from cms.apps.partner.models import Partner, PartnerPurchase
+
+
+class PartnerPurchaseAdminInline(admin.TabularInline):
+    model = PartnerPurchase
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class PartnerAdmin(admin.ModelAdmin):
@@ -24,6 +37,8 @@ class PartnerAdmin(admin.ModelAdmin):
         if not obj.code:
             obj.code = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         super(PartnerAdmin, self).save_model(request, obj, form, change)
+
+    inlines = (PartnerPurchaseAdminInline, )
 
 
 admin.site.register(Partner, PartnerAdmin)

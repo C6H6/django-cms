@@ -22,7 +22,8 @@ def details(request, travel_id):
     travel = get_object_or_404(Travel, pk=travel_id, active=True)
     places_taken = Purchase.objects.filter(travel=travel).aggregate(Sum('passengers'))
     places_left = travel.passengers_limit - (places_taken['passengers__sum'] or 0)
-    return render(request, 'travel/details.html', {'travel': travel, 'places_left': places_left})
+    ref = request.GET.get('ref', None)
+    return render(request, 'travel/details.html', {'travel': travel, 'places_left': places_left, 'ref': ref})
 
 
 def get_params(params):
