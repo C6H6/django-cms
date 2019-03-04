@@ -22,6 +22,7 @@ class Travel(models.Model):
     start_date = models.DateTimeField(default=default_start_date)
     end_date = models.DateTimeField(default=default_end_date)
     promotion_on_homepage = models.BooleanField(default=False)
+    rejections = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
