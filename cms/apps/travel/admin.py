@@ -11,5 +11,7 @@ class TravelImageInline(admin.TabularInline):
 class TravelAdmin(admin.ModelAdmin):
     inlines = [TravelImageInline]
 
+    readonly_fields = ['rejections']
+
 
 admin.site.register(Travel, TravelAdmin)
