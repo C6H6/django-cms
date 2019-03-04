@@ -72,7 +72,7 @@ def remove(request, offer_id):
     for exist in existing:
         if int(exist.offer_id) == offer_id:
             existing.remove(exist)
-            travel = Travel.objects.filter(id=offer_id).update(rejections=F('rejections')+1)
+            Travel.objects.filter(id=offer_id).update(rejections=F('rejections')+1)
 
     request.session['offers'] = existing
     return redirect('checkout:summary')
