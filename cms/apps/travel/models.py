@@ -23,6 +23,8 @@ class Travel(models.Model):
     end_date = models.DateTimeField(default=default_end_date)
     promotion_on_homepage = models.BooleanField(default=False)
     rejections = models.IntegerField(default=0)
+    discount_per_person = IntegerField(default=0, verbose_name="Discount per person (%)")
+    max_discount = IntegerField(default=0, verbose_name="Max discount per travel (%)")
 
     def __str__(self):
         return self.title

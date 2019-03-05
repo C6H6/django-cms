@@ -49,14 +49,22 @@ def summary(request):
     checkout_summary.offers = []
 
     total = 0
+    total_discount = 0
 
     for checkout_offer in offers:
         count = int(checkout_offer.people)
         offer = Travel.objects.get(pk=checkout_offer.offer_id)
-        total += offer.price * count
+
+        discount_percent = offer.discount_per_person * count
+        if discount_percent > offer.max_discount:
+            discount_percent = offer.max_discount
+
+        total += offer.price * count * (100 - discount_percent) / 100
+        total_discount += offer.price * count * discount_percent / 100
         checkout_summary.offers.append({'offer': offer, 'people': count, 'total': offer.price * count})
 
     checkout_summary.total_price = total
+    checkout_summary.total_discount = total_discount
 
     now = datetime.datetime.now()
     years = range(now.year, now.year + 10)

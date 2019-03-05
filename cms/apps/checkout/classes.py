@@ -14,4 +14,5 @@ class CheckoutOffer(object):
 
 class CheckoutSummary:
     total_price = 0
+    total_discount = 0
     offers = []
