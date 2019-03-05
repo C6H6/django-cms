@@ -32,6 +32,20 @@
                         </div>
                     </div>
 
+                    {% if travel.discount_per_person %}
+                        <div class="row">
+                            <div class="form-group col-sm-8">
+                                Current discount per person: <b>{{ travel.discount_per_person }}%
+                                (Max: {{ travel.max_discount }}%)</b>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="form-group col-sm-8">
+                            Total price: <b><span id="discount-value"></span></b> PLN
+                        </div>
+                    </div>
+
                     <div class="row">
 
                         <div class="col-lg-12">
@@ -103,4 +117,25 @@
 
         </div>
     </div>
+
+    <script>
+        updateDiscount();
+
+        $("#count").change(function () {
+            updateDiscount()
+        });
+
+        function updateDiscount() {
+            let count = $("#count").val();
+            let percentDiscount = count * {{ travel.discount_per_person|default:0 }};
+
+            if (percentDiscount > {{ travel.max_discount|default:0 }}) {
+                percentDiscount = {{ travel.max_discount }}
+            }
+
+            let price = (count * {{ travel.price }}) * (100 - percentDiscount) / 100;
+            $("#discount-value").text(price)
+        }
+    </script>
+
 {% endblock %}
